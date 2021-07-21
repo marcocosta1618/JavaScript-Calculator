@@ -63,6 +63,10 @@ export const numbers = [
       char: "/"
     },
     {
+      id: "percentage",
+      char: "%"
+    },
+    {
       id: "equals",
       char: "="
     },

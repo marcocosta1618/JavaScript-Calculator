@@ -7,7 +7,7 @@ export default function Calculator() {
   const [state, send] = useMachine(calculatorMachine);
 
   return (
-    <div className="App">
+    <div className="Calculator">
       <h3>JS Calculator</h3>
       <div id="display">{state.context.display}</div>
       <div className="keyboard">
@@ -36,6 +36,9 @@ export default function Calculator() {
                     break;
                   case "=":
                     send([{ type: "EQUALS" }]);
+                    break;
+                  case "%":
+                    send([{ type: "PERCENT" }]);
                     break;
                   default:
                     send([{ type: "OPERATOR", payload: e.target.textContent }]);

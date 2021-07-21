@@ -2,6 +2,7 @@ import { createMachine, assign } from "xstate";
 import { create, all } from "mathjs";
 const math = create(all);
 
+
 const calculatorMachine = createMachine(
     {
       id: "calculator",
@@ -11,6 +12,11 @@ const calculatorMachine = createMachine(
         operand1: "0",
         operand2: "0",
         operation: ""
+      },
+      on: {
+        PERCENT: {
+          actions: ["percentage", "getOperand1"]
+        }
       },
       states: {
         start: {
@@ -104,7 +110,7 @@ const calculatorMachine = createMachine(
     {
       actions: {
         update_display: assign({
-          display: (context, event) =>
+          display: (context, event) => 
             // remove leading zeros and multiple dots (ugly, try refactor this outside the assign function)
             /^\./.test(context.display + event.payload)
               ? (context.display + event.payload).replace(/\./, "0.")
@@ -118,7 +124,7 @@ const calculatorMachine = createMachine(
           display: ""
         }),
         store_operand1: assign({
-          operand1: (context, event) => context.display
+          operand1: (context) => context.display
         }),
         store_operator: assign({
           operation: (context, event) =>
@@ -128,13 +134,19 @@ const calculatorMachine = createMachine(
               : event.payload
         }),
         store_operand2: assign({
-          operand2: (context, event) => context.display
+          operand2: (context) => context.display
         }),
         clear_operator: assign({
           operation: ""
         }),
+        percentage: assign({
+          display: (context) =>
+            math.evaluate(
+              context.display / 100
+            )
+        }),
         display_result: assign({
-          display: (context, event) =>
+          display: (context) => 
             math.evaluate(
               `${context.operand1} ${context.operation} ${context.operand2}`
             )
