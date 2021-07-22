@@ -1,9 +1,16 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
 .Calculator {
   text-align: center;
-  padding: 10px;
+  overflow: hidden;
+  width: 236px;
+  padding: 0px;
   margin-top: 5vh;
   border: 1px solid #878787;
-  border-bottom: 1px solid #474747;
   border-radius: 7px;
 }
 
@@ -12,22 +19,109 @@
   justify-content: flex-end;
   align-items: center;
   font-size: 2rem;
-  width: min(300px);
-  height: 50px;
-  margin: 0 auto 25px;
-  padding: 4px;
-  border: 1px solid grey;
-  border-radius: 5px;
+  width: 100%;
+  height: 80px;
+  padding: 8px;
+  border: 1px solid #8e8e8e;
   color: #f3f3f3;
   background-color: #a0a0a0;
 }
 
-.keyboard {
-  max-width: 220px;
+.keyboard-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  gap: 0px 0px;
+  grid-template-areas: "seven eight nine divide" "four five six multiply" "one two three subtract" "zero decimal percentage add" "clear clear equals equals";
+  width: 234px;
+  height: 242px;
   margin: auto;
 }
-.keyboard button {
-  width: 50px;
-  height: 50px;
-  margin: 2px;
+.keyboard-grid button {
+  font-size: 1.3rem;
+  border: 1px solid #8e8e8e;
+}
+.keyboard-grid .numbers {
+  background-color: #e0e0e0;
+}
+.keyboard-grid .operators {
+  font-size: 1.5rem;
+  color: #fff;
+  background-color: #fa9245;
+}
+.keyboard-grid #nine {
+  grid-area: nine;
+  outline: none;
+}
+.keyboard-grid #eight {
+  grid-area: eight;
+  outline: none;
+}
+.keyboard-grid #seven {
+  grid-area: seven;
+  outline: none;
+}
+.keyboard-grid #six {
+  grid-area: six;
+  outline: none;
+}
+.keyboard-grid #five {
+  grid-area: five;
+  outline: none;
+}
+.keyboard-grid #four {
+  grid-area: four;
+  outline: none;
+}
+.keyboard-grid #three {
+  grid-area: three;
+  outline: none;
+}
+.keyboard-grid #two {
+  grid-area: two;
+  outline: none;
+}
+.keyboard-grid #one {
+  grid-area: one;
+  outline: none;
+}
+.keyboard-grid #zero {
+  grid-area: zero;
+  outline: none;
+}
+.keyboard-grid #decimal {
+  grid-area: decimal;
+  outline: none;
+}
+.keyboard-grid #clear {
+  grid-area: clear;
+  outline: none;
+}
+.keyboard-grid #equals {
+  grid-area: equals;
+  outline: none;
+}
+.keyboard-grid #add {
+  grid-area: add;
+  outline: none;
+}
+.keyboard-grid #subtract {
+  grid-area: subtract;
+  outline: none;
+}
+.keyboard-grid #multiply {
+  grid-area: multiply;
+  outline: none;
+}
+.keyboard-grid #divide {
+  grid-area: divide;
+  outline: none;
+}
+.keyboard-grid #percentage {
+  grid-area: percentage;
+  outline: none;
+}
+.keyboard-grid #percentage {
+  color: #000;
+  background-color: #e0e0e0;
 }/*# sourceMappingURL=Calculator.css.map */

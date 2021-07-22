@@ -14,7 +14,7 @@ export default function Calculator() {
   }, [])
 
   function handleKeydown(e) {
-  if (/\d|\./.test(e.key)) {
+    if (/\d|\./.test(e.key)) {
       let numPress = numbers.find(number => number.char === e.key).id;
       document.getElementById(numPress).click();
     } else if (/[%*+-/=]/.test(e.key)) {
@@ -29,14 +29,14 @@ export default function Calculator() {
 
   return (
     <div className="Calculator">
-      <h3>JS Calculator</h3>
       <div id="display">{state.context.display}</div>
-      <div className="keyboard">
+      <div className="keyboard-grid">
         {numbers.map((number) => {
           return (
             <button
               id={number.id}
               key={number.id}
+              className={"numbers"}
               onClick={(e) => {
                 send([{ type: "NUMBER", payload: number.char }]);
               }}
@@ -50,6 +50,7 @@ export default function Calculator() {
             <button
               id={operator.id}
               key={operator.id}
+              className={"operators"}
               onClick={(e) => {
                 switch (operator.char) {
                   case "C":
@@ -74,5 +75,3 @@ export default function Calculator() {
     </div>
   );
 }
-
-
