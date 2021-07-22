@@ -15,7 +15,7 @@ const calculatorMachine = createMachine(
       },
       on: {
         PERCENT: {
-          actions: ["percentage", "getOperand1"]
+          actions: ["percentage", "store_operand1"]
         }
       },
       states: {

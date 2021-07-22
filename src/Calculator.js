@@ -1,10 +1,31 @@
 import calculatorMachine from "./calculatorMachine.js";
 import { useMachine } from "@xstate/react";
 import { numbers, operators } from "./buttons.js";
+import { useEffect } from "react";
 import './style/Calculator.css';
 
 export default function Calculator() {
+
   const [state, send] = useMachine(calculatorMachine);
+
+  useEffect(() => {
+    window.addEventListener('keydown', handleKeydown);
+    return () => window.removeEventListener('keydown', handleKeydown);
+  }, [])
+
+  function handleKeydown(e) {
+  if (/\d|\./.test(e.key)) {
+      let numPress = numbers.find(number => number.char === e.key).id;
+      document.getElementById(numPress).click();
+    } else if (/[%*+-/=]/.test(e.key)) {
+      let opPress = operators.find(operator => operator.char === e.key).id;
+      document.getElementById(opPress).click();
+    } else if (e.key === 'c') {
+      document.getElementById('clear').click();
+    } else if (e.key === 'Enter') {
+      document.getElementById('equals').click();
+    }
+  }
 
   return (
     <div className="Calculator">
@@ -17,7 +38,7 @@ export default function Calculator() {
               id={number.id}
               key={number.id}
               onClick={(e) => {
-                send([{ type: "NUMBER", payload: e.target.textContent }]);
+                send([{ type: "NUMBER", payload: number.char }]);
               }}
             >
               {number.char}
@@ -30,7 +51,7 @@ export default function Calculator() {
               id={operator.id}
               key={operator.id}
               onClick={(e) => {
-                switch (e.target.textContent) {
+                switch (operator.char) {
                   case "C":
                     send([{ type: "CLEAR" }]);
                     break;
@@ -41,7 +62,7 @@ export default function Calculator() {
                     send([{ type: "PERCENT" }]);
                     break;
                   default:
-                    send([{ type: "OPERATOR", payload: e.target.textContent }]);
+                    send([{ type: "OPERATOR", payload: operator.char }]);
                 }
               }}
             >
