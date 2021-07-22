@@ -23,3 +23,7 @@ yarn-debug.log*
 yarn-error.log*
 src/style/Calculator.css
 src/style/Calculator.css.map
+src/style/Calculator.css
+.gitignore
+src/style/index.css
+src/style/index.css.map

@@ -28,50 +28,53 @@ export default function Calculator() {
   }
 
   return (
-    <div className="Calculator">
-      <div id="display">{state.context.display}</div>
-      <div className="keyboard-grid">
-        {numbers.map((number) => {
-          return (
-            <button
-              id={number.id}
-              key={number.id}
-              className={"numbers"}
-              onClick={(e) => {
-                send([{ type: "NUMBER", payload: number.char }]);
-              }}
-            >
-              {number.char}
-            </button>
-          );
-        })}
-        {operators.map((operator) => {
-          return (
-            <button
-              id={operator.id}
-              key={operator.id}
-              className={"operators"}
-              onClick={(e) => {
-                switch (operator.char) {
-                  case "C":
-                    send([{ type: "CLEAR" }]);
-                    break;
-                  case "=":
-                    send([{ type: "EQUALS" }]);
-                    break;
-                  case "%":
-                    send([{ type: "PERCENT" }]);
-                    break;
-                  default:
-                    send([{ type: "OPERATOR", payload: operator.char }]);
-                }
-              }}
-            >
-              {operator.char}
-            </button>
-          );
-        })}
+    <>
+      <h2>JavaScript Calculator</h2>
+      <div className="Calculator">
+        <div id="display">{state.context.display}</div>
+        <div className="keyboard-grid">
+          {numbers.map((number) => {
+            return (
+              <button
+                id={number.id}
+                key={number.id}
+                className={"numbers"}
+                onClick={(e) => {
+                  send([{ type: "NUMBER", payload: number.char }]);
+                }}
+              >
+                {number.char}
+              </button>
+            );
+          })}
+          {operators.map((operator) => {
+            return (
+              <button
+                id={operator.id}
+                key={operator.id}
+                className={"operators"}
+                onClick={(e) => {
+                  switch (operator.char) {
+                    case "C":
+                      send([{ type: "CLEAR" }]);
+                      break;
+                    case "=":
+                      send([{ type: "EQUALS" }]);
+                      break;
+                    case "%":
+                      send([{ type: "PERCENT" }]);
+                      break;
+                    default:
+                      send([{ type: "OPERATOR", payload: operator.char }]);
+                  }
+                }}
+              >
+                {operator.char}
+              </button>
+            );
+          })}
+        </div>
       </div>
-    </div>
+    </>
   );
 }
