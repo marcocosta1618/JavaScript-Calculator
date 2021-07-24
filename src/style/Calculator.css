@@ -9,17 +9,19 @@ h2 {
   font-family: "Lato";
   text-align: center;
   margin-top: 5vh;
+  color: #f3f3f3;
 }
 
 .Calculator {
   text-align: center;
-  overflow: hidden;
   width: 236px;
   padding: 0px;
   margin-top: 10vh;
+  overflow: hidden;
   border: 1px solid #878787;
   border-radius: 7px;
   background-color: #8e8e8e;
+  box-shadow: 0px 10px 20px #333;
 }
 
 #display {
@@ -31,6 +33,7 @@ h2 {
   width: 100%;
   height: 80px;
   padding: 8px;
+  overflow: hidden;
   border: 1px solid #8e8e8e;
   color: #f3f3f3;
   background: linear-gradient(#505050 20%, #909090 100%);
@@ -45,19 +48,6 @@ h2 {
   width: 234px;
   height: 242px;
   margin: auto;
-}
-.keyboard-grid button {
-  font-family: inherit;
-  font-size: 1.3rem;
-  border: 0px solid #8e8e8e;
-}
-.keyboard-grid .numbers {
-  background-color: #e0e0e0;
-}
-.keyboard-grid .operators {
-  font-size: 1.5rem;
-  color: #fff;
-  background-color: #fa9245;
 }
 .keyboard-grid #nine {
   grid-area: nine;
@@ -131,7 +121,29 @@ h2 {
   grid-area: percentage;
   outline: none;
 }
+.keyboard-grid button {
+  font-family: inherit;
+  font-size: 1.3rem;
+  border: 0px solid #8e8e8e;
+}
+.keyboard-grid .number {
+  background-color: #e0e0e0;
+}
+.keyboard-grid .number:hover {
+  background-color: #f3f3f3;
+}
+.keyboard-grid .operator {
+  font-size: 1.5rem;
+  color: #fff;
+  background-color: #fa9245;
+}
+.keyboard-grid .operator:hover {
+  background-color: #ffa969;
+}
 .keyboard-grid #percentage {
   color: #000;
   background-color: #e0e0e0;
+}
+.keyboard-grid #percentage:hover {
+  background-color: #f3f3f3;
 }/*# sourceMappingURL=Calculator.css.map */
