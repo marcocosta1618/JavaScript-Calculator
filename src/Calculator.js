@@ -1,7 +1,7 @@
 import calculatorMachine from "./calculatorMachine.js";
 import { useMachine } from "@xstate/react";
-import buttons from "./buttons.js";
 import { useEffect } from "react";
+import buttons from "./buttons.js";
 import './style/Calculator.css';
 
 export default function Calculator() {

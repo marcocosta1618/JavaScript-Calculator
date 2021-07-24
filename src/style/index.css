@@ -2,9 +2,10 @@ body {
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  height: 100vh;
   font-family: sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  height: 100vh;
+  overflow-x: hidden;
   background: radial-gradient(#f3f3f3, #333);
 }/*# sourceMappingURL=index.css.map */
