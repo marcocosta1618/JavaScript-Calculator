@@ -1,6 +1,6 @@
 import calculatorMachine from "./calculatorMachine.js";
 import { useMachine } from "@xstate/react";
-import { numbers, operators } from "./buttons.js";
+import buttons from "./buttons.js";
 import { useEffect } from "react";
 import './style/Calculator.css';
 
@@ -14,15 +14,16 @@ export default function Calculator() {
   }, [])
 
   function handleKeydown(e) {
-    if (/\d|\./.test(e.key)) {
-      let numPress = numbers.find(number => number.char === e.key).id;
-      document.getElementById(numPress).click();
-    } else if (/[%*+-/=]/.test(e.key)) {
-      let opPress = operators.find(operator => operator.char === e.key).id;
-      document.getElementById(opPress).click();
-    } else if (e.key === 'c') {
+    let buttonPress = "";
+    if (/\d|\./.test(e.key)) {              // number pressed
+      buttonPress = buttons.find(button => button.char === e.key).id;
+      document.getElementById(buttonPress).click();
+    } else if (/[%*+-/=]/.test(e.key)) {    // operator pressed
+      buttonPress = buttons.find(button => button.char === e.key).id;
+      document.getElementById(buttonPress).click();
+    } else if (e.key === 'c') {             // clear pressed
       document.getElementById('clear').click();
-    } else if (e.key === 'Enter') {
+    } else if (e.key === 'Enter') {         // enter pressed
       document.getElementById('equals').click();
     }
   }
@@ -33,45 +34,31 @@ export default function Calculator() {
       <div className="Calculator">
         <div id="display">{state.context.display}</div>
         <div className="keyboard-grid">
-          {numbers.map((number) => {
+          {buttons.map((button) => {
             return (
               <button
-                id={number.id}
-                key={number.id}
-                className={"numbers"}
+                id={button.id}
+                key={button.id}
+                className={button.type}
                 onClick={(e) => {
-                  send([{ type: "NUMBER", payload: number.char }]);
-                }}
-              >
-                {number.char}
-              </button>
-            );
-          })}
-          {operators.map((operator) => {
-            return (
-              <button
-                id={operator.id}
-                key={operator.id}
-                className={"operators"}
-                onClick={(e) => {
-                  switch (operator.char) {
+                  switch (button.char) {
                     case "C":
                       send([{ type: "CLEAR" }]);
                       break;
                     case "=":
-                      send([{ type: "EQUALS" }]);
-                      break;
+                        send([{ type: "EQUALS" }]);
+                        break;
                     case "%":
-                      send([{ type: "PERCENT" }]);
-                      break;
+                        send([{ type: "PERCENT" }]);
+                        break;
                     default:
-                      send([{ type: "OPERATOR", payload: operator.char }]);
+                        send([{ type: button.type.toUpperCase(), payload: button.char }]);
                   }
                 }}
-              >
-                {operator.char}
-              </button>
-            );
+                >
+                  {button.char}
+                </button>
+            )
           })}
         </div>
       </div>
