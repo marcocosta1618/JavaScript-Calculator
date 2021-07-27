@@ -1,132 +1,114 @@
 const buttons = [
-    {
-      id: "nine",
-      type: "number",
-      char: "9"
-    },
-    {
-      id: "eight",
-      type: "number",
-      char: "8"
-    },
-    {
-      id: "seven",
-      type: "number",
-      char: "7"
-    },
-    {
-      id: "six",
-      type: "number",
-      char: "6"
-    },
-    {
-      id: "five",
-      type: "number",
-      char: "5"
-    },
-    {
-      id: "four",
-      type: "number",
-      char: "4"
-    },
-    {
-      id: "three",
-      type: "number",
-      char: "3"
-    },
-    {
-      id: "two",
-      type: "number",
-      char: "2"
-    },
-    {
-      id: "one",
-      type: "number",
-      char: "1"
-    },
-    {
-      id: "zero",
-      type: "number",
-      char: "0"
-    },
-    {
-      id: "decimal",
-      type: "number",
-      char: "."
-    },
-    {
-      id: "add",
-      type: "operator",
-      char: "+"
-    },
-    {
-      id: "subtract",
-      type: "operator",
-      char: "-"
-    },
-    {
-      id: "multiply",
-      type: "operator",
-      char: "*"
-    },
-    {
-      id: "divide",
-      type: "operator",
-      char: "/"
-    },
-    {
-      id: "percentage",
-      type: "operator",
-      char: "%"
-    },
-    {
-      id: "equals",
-      type: "operator",
-      char: "="
-    },
-    {
-      id: "clear",
-      type: "operator",
-      char: "C"
-    }
-  ];
-  
+  {
+    id: "nine",
+    type: "number",
+    key: "9",
+    char: "9"
+  },
+  {
+    id: "eight",
+    type: "number",
+    key: "8",
+    char: "8"
+  },
+  {
+    id: "seven",
+    type: "number",
+    key: "7",
+    char: "7"
+  },
+  {
+    id: "six",
+    type: "number",
+    key: "6",
+    char: "6"
+  },
+  {
+    id: "five",
+    type: "number",
+    key: "5",
+    char: "5"
+  },
+  {
+    id: "four",
+    type: "number",
+    key: "4",
+    char: "4"
+  },
+  {
+    id: "three",
+    type: "number",
+    key: "3",
+    char: "3"
+  },
+  {
+    id: "two",
+    type: "number",
+    key: "2",
+    char: "2"
+  },
+  {
+    id: "one",
+    type: "number",
+    key: "1",
+    char: "1"
+  },
+  {
+    id: "zero",
+    type: "number",
+    key: "0",
+    char: "0"
+  },
+  {
+    id: "decimal",
+    type: "number",
+    key: ".",
+    char: "."
+  },
+  {
+    id: "add",
+    type: "operator",
+    key: "+",
+    char: "+"
+  },
+  {
+    id: "subtract",
+    type: "operator",
+    key: "-",
+    char: "-"
+  },
+  {
+    id: "multiply",
+    type: "operator",
+    key: "*",
+    char: "x",
+    payload: "*"
+  },
+  {
+    id: "divide",
+    type: "operator",
+    key: "/",
+    char: "÷",
+    payload: "/"
+  },
+  {
+    id: "percentage",
+    type: "operator",
+    key: "%",
+    char: "%"
+  },
+  {
+    id: "equals",
+    type: "operator",
+    key: "Enter",
+    char: "="
+  },
+  {
+    id: "clear",
+    type: "operator",
+    key: "c",
+    char: "C"
+  }
+];
+
 export default buttons;
-  // export const operators = [
-  //   {
-  //     id: "add",
-  //     type: "operator",
-  //     char: "+"
-  //   },
-  //   {
-  //     id: "subtract",
-  //     type: "operator",
-  //     char: "-"
-  //   },
-  //   {
-  //     id: "multiply",
-  //     type: "operator",
-  //     char: "*"
-  //   },
-  //   {
-  //     id: "divide",
-  //     type: "operator",
-  //     char: "/"
-  //   },
-  //   {
-  //     id: "percentage",
-  //     type: "operator",
-  //     char: "%"
-  //   },
-  //   {
-  //     id: "equals",
-  //     type: "operator",
-  //     char: "="
-  //   },
-  //   {
-  //     id: "clear",
-  //     type: "operator",
-  //     char: "C"
-  //   }
-  // ];
-  

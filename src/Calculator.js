@@ -1,30 +1,26 @@
 import calculatorMachine from "./calculatorMachine.js";
 import { useMachine } from "@xstate/react";
-import { useEffect } from "react";
 import buttons from "./buttons.js";
+import ButtonElement from "./ButtonElement.js";
 import './style/Calculator.css';
 
 export default function Calculator() {
-
+  // finite state machine (calculatorMachine) handles app state:
   const [state, send] = useMachine(calculatorMachine);
-
-  useEffect(() => {
-    window.addEventListener('keydown', handleKeydown);
-    return () => window.removeEventListener('keydown', handleKeydown);
-  }, [])
-
-  function handleKeydown(e) {
-    let buttonPress = "";
-    if (/\d|\./.test(e.key)) {              // number pressed
-      buttonPress = buttons.find(button => button.char === e.key).id;
-      document.getElementById(buttonPress).click();
-    } else if (/[%*+-/=]/.test(e.key)) {    // operator pressed
-      buttonPress = buttons.find(button => button.char === e.key).id;
-      document.getElementById(buttonPress).click();
-    } else if (e.key === 'c') {             // clear pressed
-      document.getElementById('clear').click();
-    } else if (e.key === 'Enter') {         // enter pressed
-      document.getElementById('equals').click();
+  // send events to state machine on click:
+  function sendToMachine(button) {
+    switch (button.char) {
+      case "C":
+        send([{ type: "CLEAR" }]);
+        break;
+      case "=":
+        send([{ type: "EQUALS" }]);
+        break;
+      case "%":
+        send([{ type: "PERCENT" }]);
+        break;
+      default:
+        send([{ type: button.type.toUpperCase(), payload: button.payload ? button.payload : button.char }]);
     }
   }
 
@@ -36,28 +32,15 @@ export default function Calculator() {
         <div className="keyboard-grid">
           {buttons.map((button) => {
             return (
-              <button
+              <ButtonElement
                 id={button.id}
                 key={button.id}
+                char={button.char}
+                keyboard={button.key}
                 className={button.type}
-                onClick={(e) => {
-                  switch (button.char) {
-                    case "C":
-                      send([{ type: "CLEAR" }]);
-                      break;
-                    case "=":
-                        send([{ type: "EQUALS" }]);
-                        break;
-                    case "%":
-                        send([{ type: "PERCENT" }]);
-                        break;
-                    default:
-                        send([{ type: button.type.toUpperCase(), payload: button.char }]);
-                  }
-                }}
-                >
-                  {button.char}
-                </button>
+                onClick={(e) => sendToMachine(button)}
+              >
+              </ButtonElement>
             )
           })}
         </div>

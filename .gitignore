@@ -45,3 +45,5 @@ FCC build/static/js/main.ec7d0db2.chunk.js
 FCC build/static/js/main.ec7d0db2.chunk.js.map
 FCC build/static/js/runtime-main.d994cbcc.js
 FCC build/static/js/runtime-main.d994cbcc.js.map
+src/style/Calculator.css
+.gitignore

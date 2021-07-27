@@ -51,75 +51,57 @@ h2 {
 }
 .keyboard-grid #nine {
   grid-area: nine;
-  outline: none;
 }
 .keyboard-grid #eight {
   grid-area: eight;
-  outline: none;
 }
 .keyboard-grid #seven {
   grid-area: seven;
-  outline: none;
 }
 .keyboard-grid #six {
   grid-area: six;
-  outline: none;
 }
 .keyboard-grid #five {
   grid-area: five;
-  outline: none;
 }
 .keyboard-grid #four {
   grid-area: four;
-  outline: none;
 }
 .keyboard-grid #three {
   grid-area: three;
-  outline: none;
 }
 .keyboard-grid #two {
   grid-area: two;
-  outline: none;
 }
 .keyboard-grid #one {
   grid-area: one;
-  outline: none;
 }
 .keyboard-grid #zero {
   grid-area: zero;
-  outline: none;
 }
 .keyboard-grid #decimal {
   grid-area: decimal;
-  outline: none;
 }
 .keyboard-grid #clear {
   grid-area: clear;
-  outline: none;
 }
 .keyboard-grid #equals {
   grid-area: equals;
-  outline: none;
 }
 .keyboard-grid #add {
   grid-area: add;
-  outline: none;
 }
 .keyboard-grid #subtract {
   grid-area: subtract;
-  outline: none;
 }
 .keyboard-grid #multiply {
   grid-area: multiply;
-  outline: none;
 }
 .keyboard-grid #divide {
   grid-area: divide;
-  outline: none;
 }
 .keyboard-grid #percentage {
   grid-area: percentage;
-  outline: none;
 }
 .keyboard-grid button {
   font-family: inherit;
@@ -137,13 +119,23 @@ h2 {
   color: #fff;
   background-color: #fa9245;
 }
-.keyboard-grid .operator:hover {
-  background-color: #ffa969;
+.keyboard-grid .operator#divide {
+  font-size: 2rem;
 }
-.keyboard-grid #percentage {
+.keyboard-grid .operator#subtract {
+  font-size: 2rem;
+}
+.keyboard-grid .operator#percentage {
+  font-size: 1.3rem;
   color: #000;
   background-color: #e0e0e0;
 }
-.keyboard-grid #percentage:hover {
+.keyboard-grid .operator#percentage:hover {
   background-color: #f3f3f3;
+}
+.keyboard-grid .operator#equals {
+  font-size: 1.9rem;
+}
+.keyboard-grid .operator:hover {
+  background-color: #ffa969;
 }/*# sourceMappingURL=Calculator.css.map */
