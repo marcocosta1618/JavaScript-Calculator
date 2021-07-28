@@ -7,8 +7,9 @@ import './style/Calculator.css';
 export default function Calculator() {
   // finite state machine (calculatorMachine) handles app state:
   const [state, send] = useMachine(calculatorMachine);
-  // send events to state machine on click:
-  function sendToMachine(button) {
+
+  // send events to state machine on click (update state):
+  function onClick(button) {
     switch (button.char) {
       case "C":
         send([{ type: "CLEAR" }]);
@@ -35,10 +36,10 @@ export default function Calculator() {
               <ButtonElement
                 id={button.id}
                 key={button.id}
-                char={button.char}
-                keyboard={button.key}
-                className={button.type}
-                onClick={(e) => sendToMachine(button)}
+                char={button.char}         // displayed character
+                keyboard={button.key}      // keyboard shortcut
+                className={button.type}    // number or operator
+                onClick={(e) => onClick(button)}
               >
               </ButtonElement>
             )

@@ -159,10 +159,10 @@ export default calculatorMachine;
 // 2. allows more than 1 leading zero only if first zero is followed by a dot ("."):
 function handleDotsAndZeros(context, event) {
   return /^\./.test(context.display + event.payload)
-    ? (context.display + event.payload).replace(/\./, "0.")
-    : /\./.test(context.display + event.payload)
+    ? (context.display + event.payload).replace(/\./, "0.")  // add leading zero if user digit '.';
+    : /\./.test(context.display + event.payload)             // if number is float;
       ? (context.display + event.payload)
-        .replace(/(?<=(\d+(\.)+\d*))\./g, "")
-        .replace(/^0+/, "0")
-      : (context.display + event.payload).replace(/^0+/, "") || 0
+        .replace(/(?<=(\d+(\.)+\d*))\./g, "")  // keep first dot only AND
+        .replace(/^0+/, "0")                   // allow only one leading zero 
+      : (context.display + event.payload).replace(/^0+/, "") || 0   // allow only one leading zero 
 }
