@@ -22,7 +22,7 @@ export default function ButtonElement({ id, className, char, keyboard, onClick }
       setIsClicked(false);
     }
     setIsClicked(true);
-    setTimeout(reset, 250);
+    setTimeout(reset, 150);
   }
 
   return (
