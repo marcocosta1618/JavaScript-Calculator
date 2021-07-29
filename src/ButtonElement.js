@@ -1,13 +1,13 @@
-import { useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 export default function ButtonElement({ id, className, char, keyboard, onClick }) {
-
-  let buttonEl = useRef(null);
 
   useEffect(() => {
     window.addEventListener('keydown', handleKeydown);
     return () => window.removeEventListener('keydown', handleKeydown);
   })
+
+  let buttonEl = useRef(null);
 
   function handleKeydown(e) {
     if (e.key === keyboard) {
@@ -15,13 +15,26 @@ export default function ButtonElement({ id, className, char, keyboard, onClick }
     }
   }
 
+  const [isClicked, setIsClicked ] = useState(false);   // state variable add/remove css animation class
+
+  function trigAnim() {
+    const reset = () => {
+      setIsClicked(false);
+    }
+    setIsClicked(true);
+    setTimeout(reset, 250);
+  }
+
   return (
     <button
       id={id}
       key={id}
-      className={className}
+      className={`${className} ${isClicked ? 'clicked' : ''}`}
       char={char}
-      onClick={onClick}
+      onClick={() => {
+        onClick();
+        trigAnim();
+      }}
       ref={buttonEl}
     >
       {char}
