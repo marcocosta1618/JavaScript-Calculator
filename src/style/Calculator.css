@@ -70,6 +70,7 @@
 .keyboard-grid button.clicked {
   -webkit-animation: anim 150ms;
           animation: anim 150ms;
+  background-color: #f3f3f3;
 }
 .keyboard-grid .number {
   background-color: #e0e0e0;
@@ -99,7 +100,7 @@
 .keyboard-grid .operator#equals {
   font-size: 1.9rem;
 }
-.keyboard-grid .operator:hover {
+.keyboard-grid .operator:hover, .keyboard-grid .operator.clicked {
   background-color: #ffa969;
 }
 
