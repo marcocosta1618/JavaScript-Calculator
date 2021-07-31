@@ -38,14 +38,14 @@ export default function Calculator() {
       while (width > 224) {
         rem.current -= 0.035;
         width -= 5;
-        if (rem.current < 0.8) { rem.current = 0.8 }
+        rem.current < 0.8 && (rem.current = 0.8);
       }
     }
     else if (width < 224) {
       while (width < 224) {
         rem.current += 0.035;
         width += 5;
-        if (rem.current > 2) { rem.current = 2 }
+        rem.current > 2 && (rem.current = 2);
       }
     }
     setDisplayFontSize(`${rem.current}rem`);

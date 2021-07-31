@@ -6,6 +6,8 @@ Fourth out of five projects of the Front End Development Libraries Certification
 
 This app uses the [xstate](https://xstate.js.org/docs/) JavaScript library and a [finite state machine](https://en.wikipedia.org/wiki/Finite-state_machine) to manage application state.
 
+This app is hosted on [GitHub-pages](https://marcocosta1618.github.io/JavaScript-Calculator/).
+
 ![REACT](https://img.shields.io/badge/REACT-grey.svg?&logo=react&logoColor=blue)&nbsp;
 ![XSTATE](https://img.shields.io/badge/XSTATE-000.svg?&logo=xstate&logoColor=white)&nbsp;
 ![SASS](https://img.shields.io/badge/SASS-cc6699.svg?&logo=sass&logoColor=white)&nbsp;
