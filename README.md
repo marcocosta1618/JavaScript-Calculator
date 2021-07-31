@@ -12,3 +12,4 @@ This app uses the [xstate](https://xstate.js.org/docs/) JavaScript library and a
 
 ---
 
+![screenshot(60%)](https://user-images.githubusercontent.com/78434326/127739817-a576208d-b966-420e-a3e9-82a05675550a.jpg)
