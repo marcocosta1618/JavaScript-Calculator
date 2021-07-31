@@ -27,16 +27,28 @@ export default function Calculator() {
   }
   ////////////////////////////////////////////////////////
 
-  // dummy display to measure displayed number width and adjust font-size:
+  // measure displayed number width and adjust font-size:
   const [displayFontSize, setDisplayFontSize] = useState('2rem');
   const style = { fontSize: displayFontSize };
-  const ref = useRef(null);
+  const displayRef = useRef(null);
+  const rem = useRef(2);
   useEffect(() => {
-    ref.current.scrollWidth > 320
-    ? setDisplayFontSize(2 - ((ref.current.scrollWidth - 220) / 180) + 'rem')
-    : ref.current.scrollWidth > 225
-    ? setDisplayFontSize(2 - ((ref.current.scrollWidth - 220) / 160) + 'rem')
-    : setDisplayFontSize('2rem') 
+    let width = displayRef.current.scrollWidth;
+    if (width > 224) {
+      while (width > 224) {
+        rem.current -= 0.035;
+        width -= 5;
+        if (rem.current < 0.8) { rem.current = 0.8 }
+      }
+    }
+    else if (width < 224) {
+      while (width < 224) {
+        rem.current += 0.035;
+        width += 5;
+        if (rem.current > 2) { rem.current = 2 }
+      }
+    }
+    setDisplayFontSize(`${rem.current}rem`);
   }, [state.context.display])
   ////////////////////////////////////////////////////////////////////////
 
@@ -44,7 +56,7 @@ export default function Calculator() {
     <>
       <h2>JavaScript Calculator</h2>
       <div className="Calculator">
-        <div id="display" style={style}>{state.context.display}</div>
+        <div id="display" ><span ref={displayRef} style={style}>{state.context.display}</span></div>
         <div className="keyboard-grid">
           {buttons.map((button) => {
             return (
@@ -61,7 +73,6 @@ export default function Calculator() {
           })}
         </div>
       </div>
-      <span ref={ref} className="dummy">{state.context.display}</span>
     </>
   );
 }
