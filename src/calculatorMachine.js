@@ -12,11 +12,6 @@ const calculatorMachine = createMachine(
       operand2: "0",
       operation: ""
     },
-    on: {
-      PERCENT: {
-        actions: ["percentage", "store_operand1"]
-      }
-    },
     states: {
       start: {
         initial: "zero",
@@ -26,14 +21,14 @@ const calculatorMachine = createMachine(
             on: {
               NUMBER: {
                 target: "#getOperand1",
-                actions: ["update_display"]
+                actions: "update_display"
               },
               OPERATOR: {
                 target: "#getOperator",
                 actions: ["store_operand1", "store_operator"]
               }
             },
-            entry: ["reset"]
+            entry: "reset"
           },
           result: {
             id: "result",
@@ -45,6 +40,10 @@ const calculatorMachine = createMachine(
               OPERATOR: {
                 target: "#getOperator",
                 actions: ["store_operand1", "store_operator"]
+              },
+              PERCENT: {
+                target: ".#result",
+                actions: "percentage1"
               },
               CLEAR: "#zero"
             }
@@ -62,6 +61,10 @@ const calculatorMachine = createMachine(
             target: "getOperator",
             actions: ["store_operand1", "store_operator"]
           },
+          PERCENT: {
+            target: ".#getOperand1",
+            actions: "percentage1"
+          },
           CLEAR: "#zero"
         }
       },
@@ -75,6 +78,10 @@ const calculatorMachine = createMachine(
           NUMBER: {
             target: "getOperand2",
             actions: ["clear_display", "update_display"]
+          },
+          PERCENT: {
+            target: ".#getOperator",
+            actions: ["percentage1", "store_operand1"]
           },
           EQUALS: "#result",
           CLEAR: "#zero"
@@ -96,6 +103,10 @@ const calculatorMachine = createMachine(
               "clear_operator",
               "store_operator"
             ]
+          },
+          PERCENT: {
+            target: ".#getOperand2",
+            actions: ["store_operand2","percentage2"]
           },
           EQUALS: {
             target: "#result",
@@ -130,10 +141,16 @@ const calculatorMachine = createMachine(
       clear_operator: assign({
         operation: ""
       }),
-      percentage: assign({
+      percentage1: assign({
         display: (context) =>
           math.evaluate(
             context.display / 100
+          )
+      }), 
+      percentage2: assign({
+        display: (context) =>
+          math.evaluate(
+            `${context.operand1 / 100} * ${context.operand2}`
           )
       }),
       display_result: assign({
@@ -159,10 +176,10 @@ export default calculatorMachine;
 // 2. allows more than 1 leading zero only if first zero is followed by a dot ("."):
 function handleDotsAndZeros(context, event) {
   return /^\./.test(context.display + event.payload)
-    ? (context.display + event.payload).replace(/\./, "0.")  // add leading zero if user digit '.';
-    : /\./.test(context.display + event.payload)             // if number is float;
-      ? (context.display + event.payload)
+    ? (context.display + event.payload).replace(/\./, "0.")  // add leading zero if user digits '.'
+    : /\./.test(context.display + event.payload)             // (if number is float);
+      ? (context.display + event.payload)      
         .replace(/(?<=(\d+(\.)+\d*))\./g, "")  // keep first dot only AND
         .replace(/^0+/, "0")                   // allow only one leading zero 
       : (context.display + event.payload).replace(/^0+/, "") || 0   // allow only one leading zero 
-}
+}                                                                   // (if number is integer)
