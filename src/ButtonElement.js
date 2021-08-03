@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
+import { PropTypes } from 'prop-types';
 
-export default function ButtonElement({ id, className, char, keyboard, onClick }) {
+function ButtonElement({ id, className, char, keyboard, onClick }) {
 
   useEffect(() => {
     window.addEventListener('keydown', handleKeydown);
@@ -41,3 +42,13 @@ export default function ButtonElement({ id, className, char, keyboard, onClick }
     </button>
   )
 }
+
+ButtonElement.propTypes = {
+  id: PropTypes.string,
+  className: PropTypes.string, 
+  char: PropTypes.string,
+  keyboard: PropTypes.string, 
+  onClick: PropTypes.func
+}
+
+export default ButtonElement
