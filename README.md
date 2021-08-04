@@ -5,6 +5,7 @@ A calculator app coded for the [freeCodeCamp](https://www.freecodecamp.org) lear
 Fourth out of five projects of the Front End Development Libraries Certification, made in React.
 
 This app uses the [xstate](https://xstate.js.org/docs/) JavaScript library and a [finite state machine](https://en.wikipedia.org/wiki/Finite-state_machine) to manage application state.
+A functional [model of the statechart](https://xstate.js.org/viz/?gist=edf865a72430b9f1cf4c291e326dd4bf) for the finite state machine used can be seen in the [xstate visualizer](https://xstate.js.org/docs/#visualizer).
 
 This app is hosted on [GitHub-pages](https://marcocosta1618.github.io/JavaScript-Calculator/).
 
