@@ -45,6 +45,10 @@ const calculatorMachine = createMachine(
                 target: ".#result",
                 actions: "percentage1"
               },
+              EQUALS: {
+                target: ".#result",
+                actions: "repeat_last_operation"
+              },
               CLEAR: "#zero"
             }
           }
@@ -157,6 +161,12 @@ const calculatorMachine = createMachine(
         display: (context) =>
           math.evaluate(
             `${context.operand1} ${context.operation} ${context.operand2}`
+          )
+      }),
+      repeat_last_operation: assign({
+        display: (context) =>
+          math.evaluate(
+            `${context.display} ${context.operation} ${context.operand2}`
           )
       }),
       reset: assign({
