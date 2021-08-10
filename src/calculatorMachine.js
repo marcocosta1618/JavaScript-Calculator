@@ -110,7 +110,7 @@ const calculatorMachine = createMachine(
           },
           PERCENT: {
             target: ".#getOperand2",
-            actions: ["store_operand2","percentage2"]
+            actions: ["store_operand2", "percentage2"]
           },
           EQUALS: {
             target: "#result",
@@ -133,11 +133,7 @@ const calculatorMachine = createMachine(
         operand1: (context) => context.display
       }),
       store_operator: assign({
-        operation: (context, event) =>
-          // if after any operator "-" is pressed, apply it to operand2 (5 * - 5 = 5 * (-5)).
-          event.payload === "-"
-            ? context.operation + event.payload
-            : event.payload
+        operation: (context, event) => handleOperators(context, event)
       }),
       store_operand2: assign({
         operand2: (context) => context.display
@@ -150,7 +146,7 @@ const calculatorMachine = createMachine(
           math.evaluate(
             context.display / 100
           )
-      }), 
+      }),
       percentage2: assign({
         display: (context) =>
           math.evaluate(
@@ -181,15 +177,37 @@ const calculatorMachine = createMachine(
 
 export default calculatorMachine;
 
-// helper function (used on update_display action):
+// HELPER FUNCTIONS
+
+// update_display action:
 // 1. prevent multiple dots;
 // 2. allows more than 1 leading zero only if first zero is followed by a dot ("."):
 function handleDotsAndZeros(context, event) {
   return /^\./.test(context.display + event.payload)
     ? (context.display + event.payload).replace(/\./, "0.")  // add leading zero if user digits '.'
     : /\./.test(context.display + event.payload)             // (if number is float);
-      ? (context.display + event.payload)      
+      ? (context.display + event.payload)
         .replace(/(?<=(\d+(\.)+\d*))\./g, "")  // keep first dot only AND
         .replace(/^0+/, "0")                   // allow only one leading zero 
       : (context.display + event.payload).replace(/^0+/, "") || 0   // allow only one leading zero 
 }                                                                   // (if number is integer)
+
+// store_operator action:
+// if minus is pressed:
+// 1. if no operator is stored use store minus;
+// 2. if stored operator is +, -, *, /, append minus so that operand2 become a negative number;
+// 3. if a minus is already appended, remove it so that operand2 become a positive number.  
+function handleOperators(context, event) {
+  if (event.payload !== "-") {
+    return context.operation = event.payload
+  } else if (event.payload === "-") {
+    if (context.operation.length === 0) { 
+      return context.operation = event.payload }
+    if (context.operation.length === 1) { 
+      return context.operation = context.operation + event.payload
+    }
+    if (context.operation.length === 2) {
+      return context.operation = context.operation[0] 
+    }
+  }
+}
