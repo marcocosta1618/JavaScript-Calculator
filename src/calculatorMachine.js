@@ -25,7 +25,7 @@ const calculatorMachine = createMachine(
               },
               OPERATOR: {
                 target: "#getOperator",
-                actions: ["store_operand1", "store_operator"]
+                actions: ["store_operand1", "store_operator1"]
               }
             },
             entry: "reset"
@@ -39,7 +39,7 @@ const calculatorMachine = createMachine(
               },
               OPERATOR: {
                 target: "#getOperator",
-                actions: ["store_operand1", "store_operator"]
+                actions: ["store_operand1", "store_operator2"]
               },
               PERCENT: {
                 target: ".#result",
@@ -63,7 +63,7 @@ const calculatorMachine = createMachine(
           },
           OPERATOR: {
             target: "getOperator",
-            actions: ["store_operand1", "store_operator"]
+            actions: ["store_operand1", "store_operator1"]
           },
           PERCENT: {
             target: ".#getOperand1",
@@ -77,7 +77,7 @@ const calculatorMachine = createMachine(
         on: {
           OPERATOR: {
             target: ".#getOperator",
-            actions: ["store_operator"]
+            actions: ["store_operator1"]
           },
           NUMBER: {
             target: "getOperand2",
@@ -105,7 +105,7 @@ const calculatorMachine = createMachine(
               "display_result",
               "store_operand1",
               "clear_operator",
-              "store_operator"
+              "store_operator1"
             ]
           },
           PERCENT: {
@@ -132,8 +132,11 @@ const calculatorMachine = createMachine(
       store_operand1: assign({
         operand1: (context) => context.display
       }),
-      store_operator: assign({
+      store_operator1: assign({
         operation: (context, event) => handleOperators(context, event)
+      }),
+      store_operator2: assign({
+        operation: (context, event) => event.payload
       }),
       store_operand2: assign({
         operand2: (context) => context.display
@@ -179,9 +182,9 @@ export default calculatorMachine;
 
 // HELPER FUNCTIONS
 
-// update_display action:
+// callback on update_display action:
 // 1. prevent multiple dots;
-// 2. allows more than 1 leading zero only if first zero is followed by a dot ("."):
+// 2. allows more than 1 leading zero only if first zero is followed by a dot (decimal number):
 function handleDotsAndZeros(context, event) {
   return /^\./.test(context.display + event.payload)
     ? (context.display + event.payload).replace(/\./, "0.")  // add leading zero if user digits '.'
@@ -192,22 +195,20 @@ function handleDotsAndZeros(context, event) {
       : (context.display + event.payload).replace(/^0+/, "") || 0   // allow only one leading zero 
 }                                                                   // (if number is integer)
 
-// store_operator action:
+// callback on store_operator1 action (fullfills FCC userstory#13):
+// allows any operator to be followed by minus ('-') except if in 'result' state,
+// so that any minus sign following any operator is cleared on a new operation.
 // if minus is pressed:
-// 1. if no operator is stored use store minus;
-// 2. if stored operator is +, -, *, /, append minus so that operand2 become a negative number;
-// 3. if a minus is already appended, remove it so that operand2 become a positive number.  
+// 1. use it as operator if none is already defined;
+// 2. or append it to any already defined operator (so that operand2 become a negative number: 4 *- 2 => 4 * -2).
 function handleOperators(context, event) {
   if (event.payload !== "-") {
     return context.operation = event.payload
-  } else if (event.payload === "-") {
-    if (context.operation.length === 0) { 
-      return context.operation = event.payload }
-    if (context.operation.length === 1) { 
-      return context.operation = context.operation + event.payload
+  }
+  else if (event.payload === "-") {
+    if (/[+-/*]/.test(context.operation)) {
+      return (context.operation = context.operation + '-').slice(0, 2)
     }
-    if (context.operation.length === 2) {
-      return context.operation = context.operation[0] 
-    }
+    return context.operation = '-'
   }
 }

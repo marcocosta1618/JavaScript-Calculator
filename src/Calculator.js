@@ -22,7 +22,7 @@ export default function Calculator() {
         send([{ type: "PERCENT" }]);
         break;
       default:
-        send([{ type: button.type.toUpperCase(), payload: button.payload ? button.payload : button.char }]);
+        send([{ type: button.type.toUpperCase(), payload: button.payload ?? button.char }]);
     }
   }
   ////////////////////////////////////////////////////////
