@@ -3,6 +3,7 @@ import { useMachine } from "@xstate/react";
 import { useRef, useState, useEffect } from "react";
 import buttons from "./buttons.js";
 import ButtonElement from "./ButtonElement.js";
+import Footer from "./Footer.js";
 import './style/Calculator.css';
 
 export default function Calculator() {
@@ -73,6 +74,7 @@ export default function Calculator() {
           })}
         </div>
       </div>
+      <Footer />
     </>
   );
 }

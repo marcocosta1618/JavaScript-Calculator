@@ -43,3 +43,21 @@ h2 {
   color: #f3f3f3;
   background: linear-gradient(#505050 20%, #909090 100%);
 }
+
+footer {
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 100vw;
+  text-align: center;
+  font-size: 0.95rem;
+  color: #f3f3f3;
+  padding: 1rem;
+  border-top: 1px solid #E0E0E0;
+  p{
+    font-family: 'Lato';
+    a {
+      font-family: inherit;
+      color: #f3f3f3;
+    }
+  }
+}
